@@ -1,7 +1,11 @@
+# ignore derived demo build files
+
 public
+site/public/
 resources
 assets/jsconfig.json
 .hugo_build.lock
+
 
 # Prepared Hugo Pages site
 !/site/
