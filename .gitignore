@@ -1,7 +1,4 @@
-# ignore derived demo build files
-
 public
-site/public/
 resources
 assets/jsconfig.json
 .hugo_build.lock
@@ -19,3 +16,9 @@ assets/jsconfig.json
 **/resources/_gen/
 **/.hugo_build.lock
 /.github-pages-setup-backups/
+
+# ignore derived demo build files
+/site/public/
+/site/resources/
+/site/resources/_gen/
+/site/.hugo_build.lock
