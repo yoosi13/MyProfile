@@ -1,0 +1,13 @@
+{
+  "config": "pages.json",
+  "theme": "template",
+  "sample": "demo",
+  "version": "0.167.0",
+  "slug": "hugo-theme-stack",
+  "npm": [],
+  "asset_build": [],
+  "generator": "3.1",
+  "repo": "https://github.com/yoosi13/MyProfile.git",
+  "baseURL": "https://yoosi13.github.io/MyProfile/",
+  "audited": true
+}
