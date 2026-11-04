@@ -1,18 +1,18 @@
 [en]
     label  = "English"
-    title  = "Hugo Theme Stack"
+    title  = "Jehyeon Oh"
     weight = 1
 
     [en.params.sidebar]
-        subtitle = "Card-style Hugo theme designed for bloggers"
+        subtitle = "JBNU Student"
 
 [ko]
     label  = "한국어"
-    title  = "Hugo 테마 Stack"
+    title  = "오제현"
     weight = 2
 
     [ko.params.sidebar]
-        subtitle = "asdf"
+        subtitle = "전북대 컴퓨터인공지능학부"
 
 [zh-hant-tw]
     label  = "正體中文"
