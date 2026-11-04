@@ -25,24 +25,29 @@ menu:
 - **학습 목표 (Learning Goals)**
   - 이론으로 접한 기술을 실제 서비스 구축에 적용하고 트러블슈팅 경험 쌓기
   - 클린 코드와 유지보수하기 좋은 소프트웨어 구조 설계 습득
-  
-### 我的旅程
 
-我在 10 多年前开始了我的 Web 开发之旅。自那以后，我参与了许多项目，从个人博客到大规模企业应用。
+### 핵심 역량 및 기술 스택 (Skills)
 
-### 技能
+- **Front-end**: HTML, CSS, JavaScript, React
+- **Back-end**: Node.js, Python, Java, C++
+- **DevOps & Tools**: Git, GitHub Actions, Hugo, Docker
 
-- **前端**: HTML, CSS, JavaScript, React, Vue
-- **后端**: Node.js, Python, Go
-- **工具**: Git, Docker, Hugo, Neovim
+## 대표 활동 및 프로젝트 
 
-## 联系我
+> 과제 실습 및 개인 학습을 통해 진행한 대표적인 프로젝트입니다[cite: 5].
 
-如果你有任何问题或只是想打个招呼，请随时联系我！
-
-- **电子邮件**: [hello@example.com](mailto:hello@example.com)
-- **Twitter**: [@example](https://twitter.com/example)
-- **GitHub**: [example](https://github.com/example)
+### 1. GitHub Actions와 Hugo를 활용한 개인 프로필 웹사이트 구축 [Testing]
+- **목적**: 정적 사이트 생성기(Hugo)와 CI/CD 도구(GitHub Actions)를 연동하여 지속 배포 가능한 개발자 포트폴리오 사이트 자동 구축[cite: 5]
+- **본인 역할**: 
+  - Hugo 테마 선정 및 사이트 구조 커스텀 (`config`, `i18n` 다국어 설정 등)
+  - GitHub Actions 워크플로(`.github/workflows/hugo-pages.yml`) 설정 및 자동 배포 파이프라인 구축
+- **진행 과정**:
+  1. 요구사항 분석 및 Hugo 기본 템플릿 세팅
+  2. Git 브랜치 전략을 활용한 기능별(언어 설정, 콘텐츠 작성) 개발 및 검증 (`hugo server`)
+  3. GitHub Pages 배포 오류(모듈 의존성, `baseURL` 설정 등) 트러블슈팅 및 최적화
+- **결과 및 성과**:
+  - HTTPS 환경에서 안정적으로 동작하는 개인 포트폴리오 웹사이트 배포 완료[cite: 5]
+  - 마크다운 기반의 효율적인 콘텐츠 관리 시스템 및 자동화된 빌드/배포 환경 확보
 
 ---
 
@@ -50,4 +55,3 @@ menu:
 > — *Albert Einstein*
 
 ---
-*此页面由 AI 生成。*
