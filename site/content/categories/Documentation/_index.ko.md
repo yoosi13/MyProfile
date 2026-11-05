@@ -1,6 +1,6 @@
 ---
-title: 文档
-description: "关于如何使用 Stack 主题的文章"
+title: 문서
+description: "여러 배운것들을 기록한 문서"
 slug: "documentation"
 image: "hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg"
 style:
