@@ -22,4 +22,3 @@ assets/jsconfig.json
 /site/resources/
 /site/resources/_gen/
 /site/.hugo_build.lock
-site/public/
