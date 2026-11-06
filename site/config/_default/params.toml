@@ -3,10 +3,10 @@ rssFullContent = true
 favicon        = "img/favicon.png"
 
 [footer]
-    since = 2020
+    since = 2026
 
 [sidebar]
-    emoji    = "✏️"
+    emoji    = "💻"
     subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     avatar   = "img/MyPhoto.png"
 
