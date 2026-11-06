@@ -1,163 +1,240 @@
 ---
-title: Markdown Syntax Guide
-date: 2026-01-25
-description: Sample article showcasing basic Markdown syntax and formatting for HTML elements.
-tags: ["markdown", "css", "html", "themes"]
+title: "AI Text Detection Model Training and Inference via LLM LoRA Fine-Tuning"
+date: 2025-05-25
+description: "The complete process of sequence classification model fine-tuning and inference pipeline construction using Hugging Face, PEFT (LoRA), and 4-bit quantization with BitsAndBytes."
+tags: ["python", "llm", "lora", "machine-learning", "transformers"]
 categories: ["MachineLearning"]
 image: pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg
 ---
 
-This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.
+This post details the full pipeline for fine-tuning a Large Language Model (LLM) using the Hugging Face library and PEFT (LoRA) technique to build and evaluate a binary classification model that distinguishes between human-written and AI-generated text.
 
 <!--more-->
 
-## Headings
+## 1. Environment Setup & Installation
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+Import essential libraries for model training and data processing, and install key packages required for resource-efficient fine-tuning.
 
-### H3
-#### H4
-##### H5
-###### H6
+- **Key Packages**: `transformers`, `peft`, `bitsandbytes`, `datasets`, `accelerate`, etc.
+- Set up the environment for low-cost, high-efficiency training with 4-bit quantization.
 
-## Paragraph
+```python
+import os
+import warnings
+import pandas as pd
+import torch
+import numpy as np
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
-
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
-
-## Blockquotes
-
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
-
-### Blockquote without attribution
-
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-> **Note** that you can use *Markdown syntax* within a blockquote.
-
-### Blockquote with attribution
-
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
-
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
-
-### Blockquote with alert
-
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> [!NOTE] Custom title
-> You can also provide a custom title for the note alert.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
-
-## Tables
-
-Tables aren't part of the core Markdown spec, but Hugo supports supports them out-of-the-box.
-
-   | Name  | Age |
-   | ----- | --- |
-   | Bob   | 27  |
-   | Alice | 23  |
-
-### Inline Markdown within tables
-
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| *italics* | **bold** | `code` |
-
-| A                                                        | B                                                                                                             | C                                                                                                                                    | D                                                 | E                                                          | F                                                                    |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
-| Lorem ipsum dolor sit amet, consectetur adipiscing elit. | Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex. | Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus | Proin sit amet velit nec enim imperdiet vehicula. | Ut bibendum vestibulum quam, eu egestas turpis gravida nec | Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien |
-
-## Code Blocks
-### Code block with backticks
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
+!pip -qq install peft
+!pip -qq install bitsandbytes
+!pip -qq install GPUtil
+!pip -qq install transformers==4.43.1
+!pip -qq install transformers accelerate sentencepiece
+!pip -qq install accelerate==0.34.2
+!pip -qq install torch
+!pip -qq install langdetect
 ```
 
-### Code block indented with four spaces
+<br>
 
-    <!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Example HTML5 Document</title>
-    </head>
-    <body>
-      <p>Test</p>
-    </body>
-    </html>
+## 2. Configuration
 
-### Diff code block
+Set a fixed random seed to ensure reproducibility, and define the hyperparameters and directory paths used for model training.
 
-```diff
-[dependencies.bevy]
-git = "https://github.com/bevyengine/bevy"
-rev = "11f52b8c72fc3a568e8bb4a4cd1f3eb025ac2e13"
-- features = ["dynamic"]
-+ features = ["jpeg", "dynamic"]
+```python
+from transformers import set_seed
+
+SEED = 123
+set_seed(SEED)
+
+warnings.filterwarnings('ignore')
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+INPUT_DIR = '/kaggle/input/2025-sw-digital-competition-datasets'
+DIR = '/kaggle/working/'
+NUM_WORKERS = os.cpu_count()
+NUM_CLASSES = 2
+
+EPOCHS, R, LORA_ALPHA, LORA_DROPOUT = 1, 64, 32, 0.3
+BATCH_SIZE = 6
+MODEL_ID = '/kaggle/input/llama-2/pytorch/7b-hf/1'
 ```
 
-### One line code block
+<br>
 
-```html
-<p>A paragraph</p>
+## 3. Data Processing & Preparation (Data Processing)
+
+Load the human-written text data and AI-generated text data, filter them based on labels, and reconstruct them into a DatasetDict format.
+
+- Data Loading & Filtering: Combine Human data (label == 0) and AI data (label == 1, generated >= 0.6).
+- Dataset Shuffling: Construct training and test sets using concatenate_datasets and shuffle.
+
+```python
+from datasets import load_dataset, concatenate_datasets, DatasetDict
+
+# 1. Load Datasets
+dataset_53 = load_dataset('csv', data_files='/kaggle/input/digital-competition-no-train-dataset/non_train_human_token.csv')
+dataset_ai = load_dataset('csv', data_files='/kaggle/input/digital-competition-no-train-dataset/top20000_ai_like_sentences (1).csv')
+
+# 2. Filter by Label & Clean Columns
+human_data = dataset_53['train'].filter(lambda x: x['label'] == 0)
+ai_data = dataset_ai['train'].filter(lambda x: x['label'] == 1)
+ai_data_filtered_by_generated = ai_data.filter(lambda x: x['generated'] >= 0.6)
+
+human_data = human_data.remove_columns(['text_length', 'token_count', 'token_bin'])
+ai_data_filtered_by_generated = ai_data_filtered_by_generated.remove_columns(['generated'])
+
+# 3. Concatenate and Split Dataset
+combined_dataset = concatenate_datasets([human_data, ai_data_filtered_by_generated]).shuffle(seed=42)
+test_dataset = combined_dataset.select(range(2000))
+
+dataset = DatasetDict({
+    'train': combined_dataset,
+    'test' : test_dataset
+})
 ```
 
-## List Types
+<br>
 
-### Ordered List
+## 4. Tokenization
 
-1. First item
-2. Second item
-3. Third item
+Load AutoTokenizer supporting multilingual processing, set the padding token, and tokenize the input text sequences.
 
-### Unordered List
+```python
+from transformers import AutoTokenizer
 
-* List item
-* Another item
-* And another item
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+tokenizer.pad_token = tokenizer.eos_token
 
-### Nested list
+tokenized_dataset = {}
+MAX_LENGTH = 512
 
-* Fruit
-  * Apple
-  * Orange
-  * Banana
-* Dairy
-  * Milk
-  * Cheese
+for split in dataset.keys():
+    tokenized_dataset[split] = dataset[split].map(
+        lambda x: tokenizer(x["text"], truncation=True, max_length=MAX_LENGTH), batched=True
+    )
+```
 
-## Other Elements — abbr, sub, sup, kbd, mark
+<br>
 
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+## 5. Model Loading & LoRA Setup
 
-H<sub>2</sub>O
+Apply 4-bit quantization (BitsAndBytesConfig) to save GPU memory, and load the AutoModelForSequenceClassification model. Then, configure PEFT (LoraConfig) for efficient parameter fine-tuning.
 
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+```python
+from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
+from peft import prepare_model_for_kbit_training, LoraConfig, TaskType, get_peft_model
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+# 4-bit Quantization Config
+quant_config = BitsAndBytesConfig(load_in_4bit=True)
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+model = AutoModelForSequenceClassification.from_pretrained(
+    MODEL_ID,
+    num_labels=NUM_CLASSES,
+    quantization_config=quant_config,
+    device_map="auto"
+)
+model.config.pad_token_id = model.config.eos_token_id
+
+# Prepare k-bit Training & LoRA Config
+model = prepare_model_for_kbit_training(model)
+
+lora_config = LoraConfig(
+    r=R,
+    lora_alpha=LORA_ALPHA,
+    lora_dropout=LORA_DROPOUT,
+    task_type=TaskType.SEQ_CLS,
+    target_modules='all-linear'
+)
+
+lora_model = get_peft_model(model, lora_config)
+lora_model.print_trainable_parameters()
+```
+
+<br>
+
+## 6. Model Training
+
+Define a custom trainer (SoftLabelTrainer) to handle Soft Labels and Binary Cross-Entropy (BCE) loss, then execute the training procedure.
+
+```python
+from transformers import Trainer, TrainingArguments, DataCollatorWithPadding
+import torch.nn.functional as F
+
+def compute_metrics(eval_pred):
+    predictions, labels = eval_pred
+    predictions = np.argmax(predictions, axis=1)
+    return {"accuracy": (predictions == labels).mean()}
+
+class SoftLabelTrainer(Trainer):
+    def compute_loss(self, model, inputs, return_outputs=False):
+        labels = inputs.pop("labels")
+        outputs = model(**inputs)
+        logits = outputs.logits
+        
+        probs = torch.softmax(logits, dim=-1)
+        ai_probs = probs[:, 1]  # "AI일 확률"
+        
+        loss = F.binary_cross_entropy(ai_probs, labels.float())
+        return (loss, outputs) if return_outputs else loss
+
+trainer = SoftLabelTrainer(
+    model=lora_model,
+    args=TrainingArguments(
+        output_dir="./data/",
+        learning_rate=2e-5,
+        per_device_train_batch_size=BATCH_SIZE,
+        per_device_eval_batch_size=BATCH_SIZE,
+        evaluation_strategy="epoch",
+        save_strategy="epoch",
+        num_train_epochs=EPOCHS,
+        weight_decay=0.01,
+        load_best_model_at_end=True,
+        logging_steps=10,
+        report_to="none",
+        fp16=True
+    ),
+    train_dataset=tokenized_dataset["train"],
+    eval_dataset=tokenized_dataset["test"],
+    tokenizer=tokenizer,
+    data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
+    compute_metrics=compute_metrics,
+)
+
+# Start Training
+trainer.train()
+```
+
+<br>
+
+## 7. Inference & Submission File Generation (Prediction & Submission)
+
+Run inference on the test dataset (test_df) using the fine-tuned model, and generate the final submission.csv file.
+
+```python
+from tqdm import tqdm
+
+predictions = []
+
+for text in tqdm(test_df['paragraph_text'].values):
+    prediction = clf(text)
+    score = prediction[0]['score']
+    label = prediction[0]['label']
+    
+    if label == 'LABEL_0':
+        score = 1 - score  # 확률 보정
+        
+    predictions.append(score)
+
+sample_submission['generated'] = predictions
+sample_submission.to_csv('submission.csv', index=False)
+```
+
+## 8. Key Takeaways from Preparing for This Competition
+
+- Full fine-tuning of Large Language Models is extremely resource-intensive and often impractical. However, leveraging LoRA alongside 4-bit quantization (BitsAndBytes) allows for highly effective training performance even within constrained GPU environments.
+
+- Data accumulated throughout a competition may prove valuable in unexpected ways later on. For instance, hard-voting and soft-voting ensemble strategies require different prediction formats, making it crucial to log all generated inference outputs.
+
+![2025 JBNU SW•AI competition's input data length distribution](text-length-distribution.jpg)
+- Conducting thorough Exploratory Data Analysis (EDA) at the beginning is the first step toward achieving top leaderboard scores, as initial raw datasets frequently contain noise. In fine-tuning tasks, analyzing text length, tokenized length distributions, and semantic domain characteristics during EDA is highly recommended before modeling.
