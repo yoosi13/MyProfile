@@ -1,12 +1,12 @@
 ---
-title: "链接"
+title: "유용한 링크"
 links:
   - title: GitHub
-    description: GitHub 是世界上最大的软件开发平台。
-    website: https://github.com
+    description: 본 프로젝트의 소스 코드가 저장된 공식 GitHub 저장소입니다.
+    website: https://github.com/yoosi13/MyProfile
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
   - title: TypeScript
-    description: TypeScript 是 JavaScript 的一个超集，它可以编译成纯 JavaScript。
+    description: 프로젝트 개발에 활용된 기술 및 참고 문서 링크입니다.
     website: https://www.typescriptlang.org
     image: ts-logo-128.jpg
 menu:
@@ -17,20 +17,4 @@ menu:
 comments: false
 ---
 
-要使用此功能，请在 frontmatter 中添加 `links` 部分。
-
-此页面的 frontmatter：
-
-```yaml
-links:
-  - title: GitHub
-    description: GitHub 是世界上最大的软件开发平台。
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript 是 JavaScript 的一个超集，它可以编译成纯 JavaScript。
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
-```
-
-`image` 字段支持本地和外部图像。
+본 페이지는 프로젝트와 관련된 주요 참고 링크 및 소스 코드 저장소 목록을 제공합니다.

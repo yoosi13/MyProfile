@@ -9,7 +9,7 @@
 [[social]]
     identifier = "twitter"
     name       = "Twitter"
-    url        = "https://twitter.com"
+    url        = "https://x.com/grildo4"
 
     [social.params]
         icon = "brand-twitter"

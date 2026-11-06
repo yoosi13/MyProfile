@@ -36,7 +36,10 @@
                     <a 
                         href='{{ .URL }}'
                         {{ if .Params.newTab }}target="_blank"{{ end }}
-                        {{ with .Name }}title="{{ . }}"{{ end }}
+                        {{ with .Name }}
+                            title="{{ . }}"
+                            aria-label="{{ . }} 사이트로 이동"
+                        {{ end }}
                         rel="me"
                     >
                         {{ $icon := default "link" .Params.Icon }}

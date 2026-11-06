@@ -1,0 +1,16 @@
+{{- $src := .Get "src" -}}
+{{- /* 1. 먼저 현재 페이지(about 폴더) 안에서 찾고, 없으면 assets 폴더에서 찾음 */ -}}
+{{- $file := .Page.Resources.GetMatch $src -}}
+{{- if not $file -}}
+  {{- $file = resources.Get $src -}}
+{{- end -}}
+
+{{- if $file -}}
+<div style="margin: 12px 0;">
+  <a href="{{ $file.RelPermalink }}" download="digital-competition-train-gpu.ipynb" target="_self" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background-color: #2b6cb0; color: #ffffff !important; text-decoration: none !important; border-radius: 8px; font-weight: 600; font-size: 1.25rem; cursor: pointer;">
+    📥 {{ default (path.Base $file.Name) (.Get "title") }}
+  </a>
+</div>
+{{- else -}}
+<p style="color: red;">파일을 찾을 수 없습니다: {{ $src }} (현재 폴더 내 파일 목록: {{ .Page.Resources }})</p>
+{{- end -}}
