@@ -2,17 +2,6 @@
 
 This is Jehyeon's personal blog for coding records.
 
-
-# Hugo Theme Stack
-
-![image](https://user-images.githubusercontent.com/5889006/190859441-141b5f81-8483-40d2-bd96-ebf85616a46d.png)
-
-Card-style Hugo theme designed for bloggers.
-
-## Quickstart
-
-Use this template: [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter)
-
 ---
 
 ## Getting Started & Prerequisites
@@ -94,6 +83,18 @@ git push origin main
   * 커스텀 Hugo 설정(`hugo.toml`) 및 블로그 게시글 본문
 * **AI 생성 및 보조 자료:**
   * README.md 내 재현·배포 실행 가이드 작성 및 명령어 가공 보조, 원본 페이지 영번역 (Gemini 활용)
+
+---
+
+# Hugo Theme Stack
+
+![image](https://user-images.githubusercontent.com/5889006/190859441-141b5f81-8483-40d2-bd96-ebf85616a46d.png)
+
+Card-style Hugo theme designed for bloggers.
+
+## Quickstart
+
+Use this template: [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter)
 
 ## Demo
 
