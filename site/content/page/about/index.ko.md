@@ -32,11 +32,13 @@ menu:
   - **목표 3 - AI를 잘 활용하되, AI에게 의존하지 않는 학습** <br>
     **실행 계획** : 개발 과정에서 AI가 제안한 코드는 그대로 복사하지 않고, 공식 문서나 다른 개발자들의 설명을 찾아보아 내부 동작 원리를 먼저 검증 및 이해한 뒤 직접 재작성 하는 학습 루틴을 실천합니다.
 
-### 핵심 역량 및 기술 스택 (Skills)
+### 핵심 역량 및 적용 사례 (Skills)
 
-- **Front-end**: HTML, CSS, JavaScript, React
-- **Back-end**: Node.js, Python, Java, C++
-- **DevOps & Tools**: Git, GitHub Actions, Hugo, Docker
+단순한 기술 습득 만이 아닌 **실제 프로젝트와 개발 환경**에 직접 적용하며 역량을 키우고 있습니다. 
+
+- **Front-end (HTML, CSS, JavaScript, React)**: 웹 표준을 준수한 사용자 인터페이스 화면을 구성하고, 컴포넌트 기반의 동적 웹 페이지 및 개인 소개 화면의 레이아웃을 커스터마이징하는 데 활용하였습니다.
+- **Back-end & AI (Python, Node.js, Java, C++)**: Python과 딥러닝 프레임워크를 활용하여 자연어 처리(NLP) 데이터 전처리, 대용량 텍스트 분석 및 AI 분류 모델 LoRA를 활용한 파인튜닝·추론 파이프라인 구축에 직접 적용하였습니다.
+- **DevOps & Tools (Git, GitHub Actions, Hugo, Docker)**: Hugo 정적 사이트 생성기와 Git/GitHub Actions를 연동하여 현재 보고 계신 개인 기술 블로그를 구축하고, 마크다운 문서 작성 시 자동으로 빌드 및 배포(CI/CD)되는 환경을 구현하는 데 사용하였습니다.
 
 ## 대표 활동 및 프로젝트 
 
