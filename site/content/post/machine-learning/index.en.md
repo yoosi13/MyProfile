@@ -8,7 +8,7 @@ tags:
     - html
     - themes
 categories:
-    - Documentation
+    - AI/ML
 image: pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg
 ---
 

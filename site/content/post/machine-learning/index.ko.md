@@ -3,13 +3,13 @@ title: "LLM LoRA 파인튜닝을 통한 AI 텍스트 판별 모델 학습 및 �
 date: 2025-05-25
 description: "Hugging Face, PEFT(LoRA), BitsAndBytes를 활용한 4-bit 양자화 및 시퀀스 분류 모델 파인튜닝과 추론 파이프라인 구축 과정"
 tags:
-- python
-- llm
-- lora
-- machine-learning
-- transformers
+        - python
+        - llm
+        - lora
+        - machine-learning
+        - transformers
 categories:
-- AI/ML
+        - AI/ML
 image: pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg
 ---
 
