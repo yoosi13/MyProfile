@@ -13,19 +13,3 @@
 
     [ko.params.sidebar]
         subtitle = "전북대 컴퓨터인공지능학부"
-
-[zh-hant-tw]
-    label  = "正體中文"
-    title  = "Hugo 主題 Stack"
-    weight = 3
-
-    [zh-hant-tw.params.sidebar]
-        subtitle = "為博客設計的卡片式 Hugo 主題"
-
-[ja]
-    label  = "日本語"
-    title  = "Hugo Theme Stack"
-    weight = 4
-
-    [ja.params.sidebar]
-        subtitle = "ブログ用のカードスタイルの Hugo テーマ"
