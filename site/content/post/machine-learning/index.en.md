@@ -3,7 +3,7 @@ title: Markdown Syntax Guide
 date: 2026-01-25
 description: Sample article showcasing basic Markdown syntax and formatting for HTML elements.
 tags: ["markdown", "css", "html", "themes"]
-categories: ["AI/ML"]
+categories: ["ai-ml"]
 image: pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg
 ---
 
