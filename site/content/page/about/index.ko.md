@@ -59,6 +59,6 @@ menu:
 
 - **📦 산출물 및 결과 설명**
 <br> **주요 산출물**: 텍스트 전처리 및 학습·추론 전체 과정을 구현한 **Python 실행 코드(`Jupyter Notebook`)** 와 모델별 하이퍼파라미터 실험 로그 및 성능 비교를 기록한 **실험 결과 문서**를 산출물로 구축하였습니다.
-<br>{{< download src="digital-competition-train-gpu.ipynb" title="모델 학습 코드 다운로드 (/ipynb/digital-competition-train-gpu.ipynb)" >}}
+<br>{{< download src="digital-competition-train-gpu.ipynb" title="모델 학습 코드 다운로드 (digital-competition-train-gpu.ipynb)" >}}
 
 <br><br> **구현 및 확인 결과**: 구현된 앙상블 추론 파이프라인을 통해 검증 및 테스트 데이터셋에 대한 이진 분류 예측 확률을 산출하였으며, 단일 모델 대비 앙상블 적용 시 분류 정확도와 F1-Score가 유의미하게 향상됨을 실험 결과로 확인하였습니다. 이러한 기술적 완성도를 인정받아 대회에서 **AI 부문 대상(1위)** 을 수상하였습니다.
