@@ -75,7 +75,6 @@ git push origin main
 ### 1. 사용 테마 및 라이선스 고지 (Theme & License)
 * **사용 테마:** [Hugo Theme Stack](https://github.com/CaiJimmy/hugo-theme-stack) (Designed by [Jimmy](https://github.com/CaiJimmy))
 * **라이선스:** **GNU General Public License v3.0 (GPL-3.0)**
-* 원본 테마의 라이선스 조건 및 저작권 표기("Theme Stack designed by Jimmy")를 유지합니다.
 
 ### 2. 콘텐츠 및 작성 출처 구분 (Author & AI Attribution)
 * **직접 작성/제작 자료:**
