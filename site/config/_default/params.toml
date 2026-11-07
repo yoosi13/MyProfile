@@ -1,13 +1,13 @@
 mainSections   = ["post"]
 rssFullContent = true
-favicon        = "img/Favicon.png"
+favicon        = "img/MyFavicon.png"
 
 [footer]
     since = 2026
 
 [sidebar]
     emoji    = "💻"
-    subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    subtitle = "JBNU Student"
     avatar   = "img/MyPhoto.png"
 
 [article]
